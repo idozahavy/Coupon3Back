@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.idoz.coupons3.beans.Company;
 import com.idoz.coupons3.beans.Customer;
 import com.idoz.coupons3.exceptions.*;
+import com.idoz.coupons3.rest.beans.ErrorMessage;
 import com.idoz.coupons3.security.TokenManager;
 import com.idoz.coupons3.service.AdminService;
 
@@ -27,7 +28,7 @@ public class AdminController {
 			service.addCompany(company);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (DetailDuplicationException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -37,7 +38,7 @@ public class AdminController {
 			service.deleteCompany(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -48,7 +49,7 @@ public class AdminController {
 			service.updateCompany(company);
 			return new ResponseEntity<>("1", HttpStatus.ACCEPTED);
 		} catch (WrongIdException | DataManipulationException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -58,7 +59,7 @@ public class AdminController {
 		try {
 			return new ResponseEntity<>(service.getOneCompany(id), HttpStatus.OK);
 		} catch (WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -76,7 +77,7 @@ public class AdminController {
 			service.addCustomer(customer);
 			return new ResponseEntity<>("1", HttpStatus.CREATED);
 		} catch (DetailDuplicationException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -87,7 +88,7 @@ public class AdminController {
 			service.deleteCustomer(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -96,9 +97,9 @@ public class AdminController {
 			@RequestBody Customer customer) {
 		try {
 			service.updateCustomer(customer);
-			return new ResponseEntity<>("1", HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(new ErrorMessage("1"), HttpStatus.ACCEPTED);
 		} catch (WrongIdException | DataManipulationException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -108,7 +109,7 @@ public class AdminController {
 		try {
 			return new ResponseEntity<>(service.getOneCustomer(id), HttpStatus.OK);
 		} catch (WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 

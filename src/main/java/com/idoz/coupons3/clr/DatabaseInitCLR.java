@@ -81,19 +81,23 @@ public class DatabaseInitCLR implements CommandLineRunner {
 		companyRepo.saveAndFlush(amd);
 	}
 
+	private static final String IMG_1 = "https://ecommerceguide.com/wp-content/uploads/2016/01/coupon-main.jpg";
+	private static final String IMG_2 = "https://mk0einvestigatoid9ob.kinstacdn.com/wp-content/uploads/2013/01/discount-coupons-696x298.jpg";
+	private static final String IMG_3 = "https://support.unicart.com/wp-content/uploads/2013/11/coupon-code-1.jpg";
+	
 	public void addAllCoupons() {
 		Coupon coupon1 = new Coupon(0, 1, Category.Electricity, "first coupon", "first", Date.valueOf("2020-08-08"),
-				Date.valueOf("2021-12-16"), 50, 10.90, "fruit floopy");
+				Date.valueOf("2021-12-16"), 50, 10.90, IMG_1);
 		Coupon coupon2 = new Coupon(0, 1, Category.Computers, "second coupon", "gro", Date.valueOf("2020-09-08"),
-				Date.valueOf("2021-12-18"), 40, 50.90, "sigmoid");
+				Date.valueOf("2021-12-18"), 40, 50.90, IMG_3);
 		Coupon coupon3 = new Coupon(0, 2, Category.AI, "third coupon", "shrik", Date.valueOf("2020-10-08"),
-				Date.valueOf("2021-12-10"), 30, 69.90, "koka");
+				Date.valueOf("2021-12-10"), 30, 69.90, IMG_2);
 		Coupon coupon4 = new Coupon(0, 2, Category.Food, "outdated coupon", "out", Date.valueOf("2020-04-08"),
-				Date.valueOf("2020-08-11"), 20, 12.50, "no");
+				Date.valueOf("2020-08-11"), 20, 12.50, IMG_3);
 		Coupon coupon5 = new Coupon(0, 1, Category.Computers, "noAmountCoupon", "0amount", Date.valueOf("2020-12-03"),
-				Date.valueOf("2021-12-11"), 0, 90.90, "agid");
+				Date.valueOf("2021-12-11"), 0, 90.90, IMG_2);
 		Coupon coupon6 = new Coupon(0, 2, Category.Computers, "sixth coupon", "desc4", Date.valueOf("2020-11-08"),
-				Date.valueOf("2021-12-11"), 20, 49.90, "singaurd");
+				Date.valueOf("2021-12-11"), 20, 49.90, IMG_1);
 		
 		couponRepo.save(coupon1);
 		couponRepo.save(coupon2);

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -46,11 +47,18 @@ public class LoginContoller {
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
-	@GetMapping("check")
-	public ResponseEntity<?> exist(@RequestHeader(name = "Authorization") String token) {
-		System.out.println(String.valueOf(tokenManager.isExist(token))+" , "+token);
-		return new ResponseEntity<>(tokenManager.isExist(token), HttpStatus.OK);
+
+	@GetMapping("check/{serviceType}")
+	public ResponseEntity<?> check(@RequestHeader(name = "Authorization") String token, @PathVariable String serviceType) {
+		System.out.println(String.valueOf(tokenManager.isExist(token)) + " , " + token);
+		if (tokenManager.isExist(token)) {
+			String bbb = tokenManager.getService(token).getClass().getSimpleName().replace("Service", "");
+			System.out.println(bbb.equals(serviceType));
+			return new ResponseEntity<>(bbb.equals(serviceType), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("token is not found on server", HttpStatus.UNAUTHORIZED);
+		}
+
 	}
 
 	@DeleteMapping()

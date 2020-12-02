@@ -43,17 +43,6 @@ public class TokenManager {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T extends ClientService> T getService(String email, String token, Class<T> clazz) {
-		if (tokenMap.containsKey(token)) {
-			ClientService service = tokenMap.get(token);
-			if (service != null && service.getClass().equals(clazz)) {
-				return (T) service;
-			}
-		}
-		return null;
-	}
-
 	public boolean isExist(String token) {
 		return tokenMap.containsKey(token);
 	}

@@ -1,10 +1,12 @@
 package com.idoz.coupons3.rest;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.idoz.coupons3.beans.*;
 import com.idoz.coupons3.exceptions.*;
+import com.idoz.coupons3.rest.beans.ErrorMessage;
 import com.idoz.coupons3.security.TokenManager;
 import com.idoz.coupons3.service.CompanyService;
 
@@ -23,9 +25,9 @@ public class CompanyController {
 			@RequestBody Coupon coupon) {
 		try {
 			service.addCoupon(coupon);
-			return new ResponseEntity<>("1", HttpStatus.CREATED);
+			return new ResponseEntity<>(new ErrorMessage("1"), HttpStatus.CREATED);
 		} catch (DetailDuplicationException | WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -36,7 +38,7 @@ public class CompanyController {
 			service.updateCoupon(coupon);
 			return new ResponseEntity<>("1", HttpStatus.ACCEPTED);
 		} catch (WrongIdException | DataManipulationException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -47,17 +49,19 @@ public class CompanyController {
 			service.deleteCoupon(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (WrongIdException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@GetMapping("coupons")
 	public ResponseEntity<?> getCoupons(@RequestAttribute(name = "service") CompanyService service,
-			@RequestParam(required = false) Category category, @RequestParam(required = false) Integer maxPrice) {
+			@RequestParam(required = false) Integer category, @RequestParam(required = false) Integer maxPrice) {
 		if (category != null) {
-			return new ResponseEntity<>(service.getCompanyCoupons(category), HttpStatus.OK);
+			System.out.println("category = "+category);
+			return new ResponseEntity<>(service.getCompanyCoupons(Category.values()[category]), HttpStatus.OK);
 		}
 		if (maxPrice != null) {
+			System.out.println("maxPrice = "+maxPrice);
 			return new ResponseEntity<>(service.getCompanyCoupons(maxPrice), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(service.getCompanyCoupons(), HttpStatus.OK);
