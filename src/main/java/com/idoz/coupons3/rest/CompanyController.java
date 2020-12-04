@@ -1,6 +1,5 @@
 package com.idoz.coupons3.rest;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
