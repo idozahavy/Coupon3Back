@@ -16,7 +16,7 @@ public class TokenManager {
 
 	private Map<String, ClientService> tokenMap;
 
-	public String addService(ClientService service) {
+	public synchronized String addService(ClientService service) {
 		for (Entry<String, ClientService> item : tokenMap.entrySet()) {
 			if (item.getValue().equals(service)) {
 				return item.getKey();
@@ -32,7 +32,7 @@ public class TokenManager {
 		return token;
 	}
 
-	public void removeService(String token) {
+	public synchronized void removeService(String token) {
 		tokenMap.remove(token);
 	}
 

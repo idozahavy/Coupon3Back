@@ -3,10 +3,13 @@ package com.idoz.coupons3.service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.idoz.coupons3.beans.Category;
@@ -51,6 +54,10 @@ public class CustomerService extends ClientService {
 		customerRepo.saveAndFlush(customer);
 		dbCoupon.setAmount(dbCoupon.getAmount() - 1);
 		couponRepo.saveAndFlush(dbCoupon);
+	}
+	
+	public List<Customer> getAllCoupons(){
+		return customerRepo.findAll();
 	}
 
 	public Set<Coupon> getCustomerCoupons() {
