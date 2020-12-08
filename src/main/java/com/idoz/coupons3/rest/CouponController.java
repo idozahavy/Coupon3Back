@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idoz.coupons3.beans.Coupon;
@@ -25,12 +26,20 @@ public class CouponController {
 
 	@SneakyThrows
 	@GetMapping("coupons/{page}")
-	public ResponseEntity<?> getAllCoupons(@PathVariable(required = false) Integer page) {
+	public ResponseEntity<?> getAllCoupons(@PathVariable(required = false) Integer page, @RequestParam(defaultValue = "5") int count) {
 		if (page == null || page < 1) {
 			throw new DataManipulationException("did not pass correct page");
 		}
-		Page<Coupon> coupons = couponRepo.findAll(PageRequest.of(page - 1, 10));
+		Page<Coupon> coupons = couponRepo.findAll(PageRequest.of(page - 1, count));
 		return new ResponseEntity<>(coupons.getContent(), HttpStatus.OK);
 	}
+	
+	
+	@SneakyThrows
+	@GetMapping("couponsCount")
+	public ResponseEntity<?> getAllCoupons() {
+		return new ResponseEntity<>(couponRepo.count(), HttpStatus.OK);
+	}
+
 
 }
