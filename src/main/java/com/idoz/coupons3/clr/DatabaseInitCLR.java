@@ -109,7 +109,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 
 	private void addAllCustomers() {
 		Customer customer1 = new Customer("person1", "last1", "mail1@a", "1234");
-		Customer customer2 = new Customer("person2", "last2", "mail2", "2");
+		Customer customer2 = new Customer("person2", "last2", "mail2@b", "2222");
 		Customer customer3 = new Customer("person3", "last3", "mail3", "3");
 		Customer customer4 = new Customer("person4", "last4", "mail4", "4");
 		

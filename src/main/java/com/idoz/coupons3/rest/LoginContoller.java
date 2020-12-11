@@ -50,14 +50,14 @@ public class LoginContoller {
 
 	@GetMapping("check/{serviceType}")
 	public ResponseEntity<?> check(@RequestHeader(name = "Authorization") String token,
-			@PathVariable String serviceType) {
+			@PathVariable String serviceType) { 
 		System.out.println(String.valueOf(tokenManager.isExist(token)) + " , " + token);
 		if (tokenManager.isExist(token)) {
 			String bbb = tokenManager.getService(token).getClass().getSimpleName().replace("Service", "");
 			System.out.println(bbb.equals(serviceType));
 			return new ResponseEntity<>(bbb.equals(serviceType), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>("token is not found on server", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>("invalid token", HttpStatus.UNAUTHORIZED);
 		}
 
 	}
