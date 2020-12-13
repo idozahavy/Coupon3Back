@@ -49,7 +49,7 @@ public class LoginCLR implements CommandLineRunner{
 		
 		System.out.println();
 		System.out.println(Art.padTo120Stars(" Customer Login "));
-		CustomerService customerService =  loginManager.login("mail1", "1", CustomerService.class);
+		CustomerService customerService =  loginManager.login("mail1@a", "1234", CustomerService.class);
 		System.out.println(Art.padTo120Stars(" Customer Login - getCustomerDetails check "));
 		Table200.print(customerService.getCustomerDetails());
 

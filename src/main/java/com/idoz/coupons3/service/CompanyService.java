@@ -71,6 +71,7 @@ public class CompanyService extends ClientService {
 		Company company = companyRepo.getOne(companyId);
 		company.removeCoupon(dbCoupon);
 		companyRepo.saveAndFlush(company);
+		couponRepo.delete(dbCoupon);
 	}
 
 	public List<Coupon> getCompanyCoupons() {

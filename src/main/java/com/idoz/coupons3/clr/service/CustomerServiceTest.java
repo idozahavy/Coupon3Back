@@ -42,7 +42,7 @@ public class CustomerServiceTest {
 
 		System.out.println();
 		System.out.println(Art.padTo120Stars(" Login (Success) "));
-		System.out.println(customerService.login("mail1", "1"));
+		System.out.println(customerService.login("mail1@a", "1234"));
 
 		System.out.println();
 		System.out.println(Art.padTo120Stars(" Get Details "));

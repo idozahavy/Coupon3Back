@@ -35,4 +35,10 @@ public class CustomerController {
 		return new ResponseEntity<>(service.getCustomerDetails(), HttpStatus.OK);
 	}
 	
+	@SneakyThrows
+	@GetMapping("coupons")
+	public ResponseEntity<?> getCustomerCoupons(@RequestAttribute("service") CustomerService service){
+		return new ResponseEntity<>(service.getCustomerCoupons(), HttpStatus.OK);
+	}
+	
 }

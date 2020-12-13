@@ -37,11 +37,11 @@ public class DatedCouponsJob implements Runnable {
 		synchronized (this.getClass()) {
 			System.out.println("running DatedCouponsJob...");
 			final String lastDateString = readFile();
-			if (lastDateString == null || LocalDate.now().isAfter(LocalDate.parse(lastDateString))) {
+//			if (lastDateString == null || LocalDate.now().isAfter(LocalDate.parse(lastDateString))) {
 				System.out.println("Clearing outdated coupons...");
 				clearOutdatedCoupons();
 				writeNowToFile();
-			}
+//			}
 		}
 	}
 
@@ -49,14 +49,13 @@ public class DatedCouponsJob implements Runnable {
 		List<Coupon> coupons = couponRepository.findAll();
 		for (Coupon coupon : coupons) {
 			if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
-				Company company = companyRepository.getOne(coupon.getCompanyId());
+				System.out.println("coupon deletion - "+coupon.toString());
 				List<Customer> customersWithCoupon = customerRepository.findByCouponsContaining(coupon);
 				for (Customer customer : customersWithCoupon) {
 					customer.removeCoupon(coupon);
 					customerRepository.saveAndFlush(customer);
 				}
-				company.removeCoupon(coupon);
-				companyRepository.saveAndFlush(company);
+				couponRepository.delete(coupon);
 			}
 		}
 	}

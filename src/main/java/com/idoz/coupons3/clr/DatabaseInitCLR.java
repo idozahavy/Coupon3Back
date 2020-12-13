@@ -43,7 +43,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 		Coupon cp1 = couponRepo.getOne(1);
 		Coupon cp2 = couponRepo.getOne(2);
 		Coupon cp3 = couponRepo.getOne(3);
-		Coupon cp4 = couponRepo.getOne(4);
+//		Coupon cp4 = couponRepo.getOne(4);
 
 		Customer cust1 = customerRepo.getOne(1);
 		cust1.purchaseCoupon(cp1);
@@ -60,16 +60,16 @@ public class DatabaseInitCLR implements CommandLineRunner {
 		cust3.purchaseCoupon(cp2);
 		customerRepo.saveAndFlush(cust3);
 
-		Customer cust4 = customerRepo.getOne(4);
-		cust4.purchaseCoupon(cp4);
-		customerRepo.saveAndFlush(cust4);
+//		Customer cust4 = customerRepo.getOne(4);
+//		cust4.purchaseCoupon(cp4);
+//		customerRepo.saveAndFlush(cust4);
 
 		cp1.setAmount(cp1.getAmount() - 2);
 		cp2.setAmount(cp2.getAmount() - 2);
 		cp3.setAmount(cp3.getAmount() - 2);
-		cp4.setAmount(cp4.getAmount() - 1);
+//		cp4.setAmount(cp4.getAmount() - 1);
 
-		couponRepo.saveAll(List.of(cp1, cp2, cp3, cp4));
+		couponRepo.saveAll(List.of(cp1, cp2, cp3));
 		couponRepo.flush();
 	}
 
