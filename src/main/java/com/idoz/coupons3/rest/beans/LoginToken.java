@@ -11,5 +11,5 @@ public class LoginToken {
 
 	private String token;
 	private String clientType;
-	
+
 }

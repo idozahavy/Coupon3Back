@@ -52,7 +52,7 @@ public class Art {
 		// https://www.rgagnon.com/javadetails/java-display-ascii-banner.html
 
 		// need to adjust for width and height
-		BufferedImage image = new BufferedImage(1+9*str.length(), 20, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(1 + 9 * str.length(), 20, BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 		g.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		Graphics2D graphics = (Graphics2D) g;
@@ -72,24 +72,24 @@ public class Art {
 			StringBuilder sb = new StringBuilder();
 			// need to adjust for width and height
 			for (int x = 0; x < image.getWidth(); x++)
-				sb.append(image.getRGB(x, y) < -13500200 ? " " : "#" );
+				sb.append(image.getRGB(x, y) < -13500200 ? " " : "#");
 			if (sb.toString().trim().isEmpty())
 				continue;
-			while (sb.lastIndexOf(" ") == sb.length()-1) {
-				sb.replace(sb.length()-1, sb.length(), "");
+			while (sb.lastIndexOf(" ") == sb.length() - 1) {
+				sb.replace(sb.length() - 1, sb.length(), "");
 			}
 			result += sb.toString() + "\r\n";
 		}
 		if (result.endsWith("\r\n"))
-			result = result.substring(0, result.length()-2);
+			result = result.substring(0, result.length() - 2);
 		return result;
 	}
-	
+
 	public static String stringToArtH2(String str) {
 		// https://www.rgagnon.com/javadetails/java-display-ascii-banner.html
 
 		// need to adjust for width and height
-		BufferedImage image = new BufferedImage(1+9*str.length(), 15, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(1 + 9 * str.length(), 15, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = image.getGraphics();
 		g.setFont(new Font(Font.DIALOG, Font.BOLD, 10));
 		Graphics2D graphics = (Graphics2D) g;
@@ -109,16 +109,16 @@ public class Art {
 			StringBuilder sb = new StringBuilder();
 			// need to adjust for width and height
 			for (int x = 0; x < image.getWidth(); x++)
-				sb.append(image.getRGB(x, y) == 0 ? " " : "#" );
+				sb.append(image.getRGB(x, y) == 0 ? " " : "#");
 			if (sb.toString().trim().isEmpty())
 				continue;
-			while (sb.lastIndexOf(" ") == sb.length()-1) {
-				sb.replace(sb.length()-1, sb.length(), "");
+			while (sb.lastIndexOf(" ") == sb.length() - 1) {
+				sb.replace(sb.length() - 1, sb.length(), "");
 			}
 			result += sb.toString() + "\r\n";
 		}
 		if (result.endsWith("\r\n"))
-			result = result.substring(0, result.length()-2);
+			result = result.substring(0, result.length() - 2);
 		return result;
 	}
 

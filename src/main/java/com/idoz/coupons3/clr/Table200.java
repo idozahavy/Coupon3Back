@@ -1,7 +1,11 @@
 package com.idoz.coupons3.clr;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 //	v2.0
 //	dont try printing list of primitives such as: String or Integer --- NO!
@@ -11,9 +15,10 @@ import java.util.*;
 //  Table.print(myCollection<MyClass>);
 
 public class Table200 {
-	
+
 	// can add here field names you dont want to show,
-	// for example - List.of("firstname") wont show the field named 'firstName' (insert all lowercase)
+	// for example - List.of("firstname") wont show the field named 'firstName'
+	// (insert all lowercase)
 	public static List<String> noShowFields = new ArrayList<String>(List.of());
 
 	public static void print(Object item) {

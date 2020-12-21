@@ -13,11 +13,11 @@ import com.idoz.coupons3.rest.beans.ErrorMessage;
 
 @ControllerAdvice
 public class ControllersExceptionHandler {
-	
-	@ExceptionHandler({ WrongIdException.class, DetailDuplicationException.class, DataManipulationException.class})
+
+	@ExceptionHandler({ WrongIdException.class, DetailDuplicationException.class, DataManipulationException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ResponseEntity<ErrorMessage> handleException(Exception e) {
-		return new ResponseEntity<>(new ErrorMessage(e),HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new ErrorMessage(e), HttpStatus.BAD_REQUEST);
 	}
 
 }

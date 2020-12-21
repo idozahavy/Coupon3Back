@@ -26,20 +26,19 @@ public class CouponController {
 
 	@SneakyThrows
 	@GetMapping("coupons/{page}")
-	public ResponseEntity<?> getAllCoupons(@PathVariable(required = false) Integer page, @RequestParam(defaultValue = "5") int count) {
+	public ResponseEntity<?> getAllCoupons(@PathVariable(required = false) Integer page,
+			@RequestParam(defaultValue = "5") int count) {
 		if (page == null || page < 1) {
 			throw new DataManipulationException("did not pass correct page");
 		}
 		Page<Coupon> coupons = couponRepo.findAll(PageRequest.of(page - 1, count));
 		return new ResponseEntity<>(coupons.getContent(), HttpStatus.OK);
 	}
-	
-	
+
 	@SneakyThrows
 	@GetMapping("couponsCount")
 	public ResponseEntity<?> getAllCoupons() {
 		return new ResponseEntity<>(couponRepo.count(), HttpStatus.OK);
 	}
-
 
 }

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idoz.coupons3.login.LoginManager;
-import com.idoz.coupons3.rest.beans.*;
+import com.idoz.coupons3.rest.beans.LoginCreds;
+import com.idoz.coupons3.rest.beans.LoginToken;
 import com.idoz.coupons3.security.TokenManager;
+import com.idoz.coupons3.security.beans.ServiceData;
 import com.idoz.coupons3.service.ClientService;
 
 import lombok.AllArgsConstructor;
@@ -34,13 +36,13 @@ public class LoginContoller {
 	private LoginManager loginManager;
 	private TokenManager tokenManager;
 
-	@PostMapping()
+	@PostMapping
 	public ResponseEntity<?> login(@RequestBody LoginCreds creds) {
 		ClientService client;
 		for (Class<? extends ClientService> clazz : LOGIN_CLIENT_CLASSES) {
 			client = loginManager.login(creds.getEmail(), creds.getPassword(), clazz);
 			if (client != null) {
-				String token = tokenManager.addService(client);
+				String token = tokenManager.addService(new ServiceData(client));
 				LoginToken loginToken = new LoginToken(token, clazz.getSimpleName().replace("Service", ""));
 				return new ResponseEntity<>(loginToken, HttpStatus.OK);
 			}
@@ -50,10 +52,10 @@ public class LoginContoller {
 
 	@GetMapping("check/{serviceType}")
 	public ResponseEntity<?> check(@RequestHeader(name = "Authorization") String token,
-			@PathVariable String serviceType) { 
+			@PathVariable String serviceType) {
 		System.out.println(String.valueOf(tokenManager.isExist(token)) + " , " + token);
 		if (tokenManager.isExist(token)) {
-			String bbb = tokenManager.getService(token).getClass().getSimpleName().replace("Service", "");
+			String bbb = tokenManager.getService(token).getService().getClass().getSimpleName().replace("Service", "");
 			System.out.println(bbb.equals(serviceType));
 			return new ResponseEntity<>(bbb.equals(serviceType), HttpStatus.OK);
 		} else {
@@ -62,7 +64,7 @@ public class LoginContoller {
 
 	}
 
-	@DeleteMapping()
+	@DeleteMapping
 	public ResponseEntity<?> logout(@RequestHeader(name = "Authorization") String token) {
 		tokenManager.removeService(token);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

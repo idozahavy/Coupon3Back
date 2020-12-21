@@ -6,19 +6,21 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.idoz.coupons3.service.ClientService;
+import com.idoz.coupons3.security.beans.ServiceData;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Component
 @AllArgsConstructor
 public class TokenManager {
 
-	private Map<String, ClientService> tokenMap;
+	@Getter
+	private Map<String, ServiceData> tokenMap;
 
-	public synchronized String addService(ClientService service) {
-		for (Entry<String, ClientService> item : tokenMap.entrySet()) {
-			if (item.getValue().equals(service)) {
+	public synchronized String addService(ServiceData data) {
+		for (Entry<String, ServiceData> item : tokenMap.entrySet()) {
+			if (item.getValue().equals(data)) {
 				return item.getKey();
 			}
 		}
@@ -27,7 +29,7 @@ public class TokenManager {
 		while (tokenMap.containsKey(token)) {
 			token = UUID.randomUUID().toString();
 		}
-		tokenMap.put(token, service);
+		tokenMap.put(token, data);
 //		System.out.println(tokenMap);
 		return token;
 	}
@@ -36,7 +38,7 @@ public class TokenManager {
 		tokenMap.remove(token);
 	}
 
-	public ClientService getService(String token) {
+	public ServiceData getService(String token) {
 		if (tokenMap.containsKey(token)) {
 			return tokenMap.get(token);
 		}

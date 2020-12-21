@@ -24,21 +24,22 @@ public class CustomerController {
 
 	@SneakyThrows
 	@PostMapping("coupon")
-	public ResponseEntity<?> purchaseCoupon(@RequestAttribute("service") CustomerService service, @RequestBody Coupon coupon){
+	public ResponseEntity<?> purchaseCoupon(@RequestAttribute("service") CustomerService service,
+			@RequestBody Coupon coupon) {
 		service.purchaseCoupon(coupon);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@SneakyThrows
 	@GetMapping
-	public ResponseEntity<?> getDetails(@RequestAttribute("service") CustomerService service){
+	public ResponseEntity<?> getDetails(@RequestAttribute("service") CustomerService service) {
 		return new ResponseEntity<>(service.getCustomerDetails(), HttpStatus.OK);
 	}
-	
+
 	@SneakyThrows
 	@GetMapping("coupons")
-	public ResponseEntity<?> getCustomerCoupons(@RequestAttribute("service") CustomerService service){
+	public ResponseEntity<?> getCustomerCoupons(@RequestAttribute("service") CustomerService service) {
 		return new ResponseEntity<>(service.getCustomerCoupons(), HttpStatus.OK);
 	}
-	
+
 }

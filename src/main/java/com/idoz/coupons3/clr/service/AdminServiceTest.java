@@ -6,11 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.idoz.coupons3.beans.*;
+import com.idoz.coupons3.beans.Category;
+import com.idoz.coupons3.beans.Company;
+import com.idoz.coupons3.beans.Coupon;
+import com.idoz.coupons3.beans.Customer;
 import com.idoz.coupons3.clr.Art;
 import com.idoz.coupons3.clr.Table200;
-import com.idoz.coupons3.exceptions.*;
-import com.idoz.coupons3.repo.*;
+import com.idoz.coupons3.exceptions.DataManipulationException;
+import com.idoz.coupons3.exceptions.DetailDuplicationException;
+import com.idoz.coupons3.exceptions.WrongIdException;
+import com.idoz.coupons3.repo.CompanyRepository;
+import com.idoz.coupons3.repo.CouponRepository;
+import com.idoz.coupons3.repo.CustomerRepository;
 import com.idoz.coupons3.service.AdminService;
 
 @Component
@@ -21,10 +28,10 @@ public class AdminServiceTest {
 
 	@Autowired
 	private CustomerRepository customerRepo;
-	
+
 	@Autowired
 	private CouponRepository couponRepo;
-	
+
 	@Autowired
 	private CompanyRepository companyRepo;
 
@@ -108,8 +115,8 @@ public class AdminServiceTest {
 		}
 
 		System.out.println(Art.padTo120Stars(" added 1 coupon to tempCompany for testings "));
-		tempCompany.addCoupon(new Coupon(0, tempCompany.getId(), Category.AI, "DeepMind", "wow", Date.valueOf("2017-08-10"),
-				Date.valueOf("2025-08-10"), 1, 1 << 10, "aif"));
+		tempCompany.addCoupon(new Coupon(0, tempCompany.getId(), Category.AI, "DeepMind", "wow",
+				Date.valueOf("2017-08-10"), Date.valueOf("2025-08-10"), 1, 1 << 10, "aif"));
 		companyRepo.saveAndFlush(tempCompany);
 		tempCompany = companyRepo.getOne(tempCompany.getId());
 		System.out.println();

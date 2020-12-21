@@ -76,7 +76,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 	public void addAllCompanies() {
 		Company ibm = new Company("ibm", "mymail@cc.com", "1234");
 		Company amd = new Company("amd", "myamd@cc.com", "2345");
-		
+
 		companyRepo.saveAndFlush(ibm);
 		companyRepo.saveAndFlush(amd);
 	}
@@ -84,7 +84,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 	private static final String IMG_1 = "https://ecommerceguide.com/wp-content/uploads/2016/01/coupon-main.jpg";
 	private static final String IMG_2 = "https://mk0einvestigatoid9ob.kinstacdn.com/wp-content/uploads/2013/01/discount-coupons-696x298.jpg";
 	private static final String IMG_3 = "https://support.unicart.com/wp-content/uploads/2013/11/coupon-code-1.jpg";
-	
+
 	public void addAllCoupons() {
 		Coupon coupon1 = new Coupon(0, 1, Category.Electricity, "first coupon", "first", Date.valueOf("2020-08-08"),
 				Date.valueOf("2021-12-16"), 50, 10.90, IMG_1);
@@ -98,7 +98,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 				Date.valueOf("2021-12-11"), 0, 90.90, IMG_2);
 		Coupon coupon6 = new Coupon(0, 2, Category.Computers, "sixth coupon", "desc4", Date.valueOf("2020-11-08"),
 				Date.valueOf("2021-12-11"), 20, 49.90, IMG_1);
-		
+
 		couponRepo.save(coupon1);
 		couponRepo.save(coupon2);
 		couponRepo.save(coupon3);
@@ -112,7 +112,7 @@ public class DatabaseInitCLR implements CommandLineRunner {
 		Customer customer2 = new Customer("person2", "last2", "mail2@b", "2222");
 		Customer customer3 = new Customer("person3", "last3", "mail3", "3");
 		Customer customer4 = new Customer("person4", "last4", "mail4", "4");
-		
+
 		customerRepo.saveAndFlush(customer1);
 		customerRepo.saveAndFlush(customer2);
 		customerRepo.saveAndFlush(customer3);

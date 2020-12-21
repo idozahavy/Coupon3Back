@@ -11,5 +11,5 @@ public class LoginCreds {
 
 	private String email;
 	private String password;
-	
+
 }

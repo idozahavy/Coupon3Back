@@ -13,6 +13,4 @@ public class Coupons3Application {
 		System.out.println("Inversion of control initialized");
 	}
 
-	
-	
 }

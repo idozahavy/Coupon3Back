@@ -26,10 +26,10 @@ public class CustomerServiceTest {
 
 	@Autowired
 	private CouponRepository couponRepository;
-	
+
 	@Autowired
 	private CustomerRepository customerRepository;
-	
+
 	public void run() {
 		System.out.println();
 		System.out.println(Art.stringToArtH1("CustomerService Test"));
@@ -56,7 +56,7 @@ public class CustomerServiceTest {
 
 		System.out.println(Art.padTo120Stars(" Get Customer Coupons Max Price 40 "));
 		Table200.print(customerService.getCustomerCoupons(40));
-		
+
 		List<Coupon> allCoupons = couponRepository.findAll();
 		Coupon couponPurchased = allCoupons.get(allCoupons.size() - 1);
 
@@ -86,7 +86,7 @@ public class CustomerServiceTest {
 		}
 		System.out.println(" After - ");
 		Table200.print(customerService.getCustomerCoupons());
-		
+
 		System.out.println(Art.padTo120Stars(" Purchase Coupon (Fail - coupon does not exist) "));
 		try {
 			Coupon noCoupon = new Coupon(0, 0, Category.AI, "", "", new Date(0), new Date(0), 0, 0, "");
@@ -95,7 +95,7 @@ public class CustomerServiceTest {
 		} catch (WrongIdException | DataManipulationException | DetailDuplicationException e) {
 			System.out.println("Error Thrown - " + e.getMessage());
 		}
-		
+
 		System.out.println(Art.padTo120Stars(" Purchase Coupon (Fail - outdated) "));
 		try {
 			Coupon outdatedCoupon = new Coupon(4, 0, Category.AI, "", "", new Date(0), new Date(0), 0, 0, "");
@@ -104,7 +104,7 @@ public class CustomerServiceTest {
 		} catch (WrongIdException | DataManipulationException | DetailDuplicationException e) {
 			System.out.println("Error Thrown - " + e.getMessage());
 		}
-		
+
 		System.out.println(Art.padTo120Stars(" Purchase Coupon (Fail - amount 0) "));
 		try {
 			Coupon noAmountCoupon = new Coupon(5, 0, Category.AI, "", "", new Date(0), new Date(0), 0, 0, "");
@@ -113,12 +113,12 @@ public class CustomerServiceTest {
 		} catch (WrongIdException | DataManipulationException | DetailDuplicationException e) {
 			System.out.println("Error Thrown - " + e.getMessage());
 		}
-		
+
 		couponPurchased = couponRepository.getOne(couponPurchased.getId());
 		Customer customer = customerService.getCustomerDetails();
 		customer.removeCoupon(couponPurchased);
 		customerRepository.saveAndFlush(customer);
-		
+
 	}
 
 }

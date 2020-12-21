@@ -5,7 +5,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.idoz.coupons3.security.ServiceInterceptor;
-import com.idoz.coupons3.service.*;
+import com.idoz.coupons3.service.AdminService;
+import com.idoz.coupons3.service.CompanyService;
+import com.idoz.coupons3.service.CustomerService;
 
 @Configuration
 public class InterceptorsConfig implements WebMvcConfigurer {

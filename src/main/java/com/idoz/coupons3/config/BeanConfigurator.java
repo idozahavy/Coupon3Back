@@ -4,18 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import com.idoz.coupons3.service.ClientService;
+import com.idoz.coupons3.security.beans.ServiceData;
 
+@Configuration
 public class BeanConfigurator {
 
 	@Bean
-	public Map<String, ClientService> clientServiceMap() {
-		return new HashMap<>();
-	}
-	
-	@Bean
-	public Map<String, String> emailTokenMap() {
+	public Map<String, ServiceData> clientServiceMap() {
 		return new HashMap<>();
 	}
 

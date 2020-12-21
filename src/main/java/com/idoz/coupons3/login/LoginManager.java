@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.idoz.coupons3.service.*;
+import com.idoz.coupons3.service.ClientService;
 
 @Component
 public class LoginManager {

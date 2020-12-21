@@ -7,5 +7,5 @@ import com.idoz.coupons3.beans.Coupon;
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
 	boolean existsCouponByCompanyIdAndTitle(int companyId, String title);
-	
+
 }

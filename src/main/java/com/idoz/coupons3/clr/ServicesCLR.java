@@ -3,7 +3,6 @@ package com.idoz.coupons3.clr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import com.idoz.coupons3.clr.service.AdminServiceTest;
 import com.idoz.coupons3.clr.service.CompanyServiceTest;
@@ -26,7 +25,7 @@ public class ServicesCLR implements CommandLineRunner {
 	public void run(String... args) {
 		Table200.noShowFields.clear();
 		Table200.noShowFields.add("coupons");
-		
+
 		customerTest.run();
 		companyTest.run();
 		adminTest.run();
